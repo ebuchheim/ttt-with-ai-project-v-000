@@ -108,7 +108,24 @@ class Game
     end
 
     def self.start_wargames
+        x_won = 0
+        o_won = 0
+        tie_game = 0
         game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
-        game.play
+        100.times do
+            game.play
+            if game.winner == "X"
+                x_won += 1
+            elsif game.winner == "O"
+                o_won += 1
+            else
+                tie_game += 1
+            end
+        end
+        puts "Computer played Computer 100 times.  Whew!"
+        puts "Here are the standings:"
+        puts "X won the game #{x_won} times."
+        puts "O won the game #{o_won} times."
+        puts "And X tied O #{tie_game} times."
     end
 end
