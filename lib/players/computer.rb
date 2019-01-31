@@ -30,14 +30,6 @@ module Players
             elsif best_rest_array != nil
                 best_rest_array.sample
             end
-
-            board.cells.each_with_index do |space, index|
-                if space == " "
-                    index = index + 1
-                    move = index.to_s
-                    return move
-                end
-            end
         end
 
     def middle?(board)
@@ -67,25 +59,29 @@ module Players
     end
 
     def get_best_rest(moves, board)    #checks side middles when no corner with 1+ complement token
-        moves.find do |move|
-            WIN_COMBINATIONS.find do |win_combo|
+        best_rest = []
+        moves.map do |move|
+            WIN_COMBINATIONS.map do |win_combo|
                 contents = win_combo.map {|i| board.cells[i]}
                 if win_combo.include?(move - 1) && contents.include?(self.token)
-                    move
+                    best_rest << move
                 end
             end
         end
+        best_rest.sample
     end
 
     def get_best_corner(corners, board)
-        corners.find do |corner|
-            WIN_COMBINATIONS.find do |win_combo|
+        best_corners = []
+        corners.map do |corner|
+            WIN_COMBINATIONS.map do |win_combo|
                 contents = win_combo.map {|i| board.cells[i]}
                 if win_combo.include?(corner - 1) && contents.include?(self.token)
-                    corner
+                    best_corners << corner
                 end
             end
         end
+        best_corners.sample
     end
 
     def move_to_block(board)
