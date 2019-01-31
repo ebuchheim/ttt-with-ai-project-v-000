@@ -71,10 +71,12 @@ class Game
 
     def turn 
         @board.display
+        puts "It's your turn, #{current_player.token}!"
         user_input = current_player.move(@board)
         if @board.valid_move?(user_input)
             @board.update(user_input, current_player)
         else
+            puts "Sorry, that spot is already taken!"
             turn
         end
     end
@@ -100,5 +102,13 @@ class Game
         game.play
     end
 
+    def self.start_two_humans
+        game = Game.new(Players::Human.new("X"), Players::Human.new("O"))
+        game.play
+    end
 
+    def self.start_wargames
+        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
+        game.play
+    end
 end

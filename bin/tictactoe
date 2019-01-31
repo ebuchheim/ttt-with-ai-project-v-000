@@ -1,4 +1,15 @@
 #!/usr/bin/env ruby
 
 require_relative '../config/environment'
-Game.start
+puts "Welcome to Tic Tac Toe!"
+puts "Who will be playing today?"
+puts "For Human VS. Human, please enter '1'"
+puts "For Human VS. Computer, please enter '2'"
+user_input = gets.chomp
+if user_input.to_i == 2
+    Game.start
+elsif user_input.to_i == 1
+    Game.start_two_humans
+elsif user_input == "wargames"
+    Game.start_wargames
+end
