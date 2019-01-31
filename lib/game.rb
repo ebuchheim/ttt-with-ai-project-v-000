@@ -111,8 +111,8 @@ class Game
         x_won = 0
         o_won = 0
         tie_game = 0
-        game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
         100.times do
+            game = Game.new(Players::Computer.new("X"), Players::Computer.new("O"))
             game.play
             if game.winner == "X"
                 x_won += 1
